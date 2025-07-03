@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-
+import { Link } from "react-router-dom";
 export default function Dashboard() {
   const [data, setData] = useState('');
   const [error, setError] = useState('');
@@ -32,6 +32,10 @@ export default function Dashboard() {
   return (
     <div style={{ padding: '20px' }}>
       <h2>Dashboard</h2>
+      <Link to="/logout">
+  <button>Logout</button>
+</Link>
+
       {error && <p style={{ color: 'red' }}>{error}</p>}
       {data && <pre>{data}</pre>}
     </div>

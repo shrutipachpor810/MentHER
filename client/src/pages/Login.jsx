@@ -14,7 +14,7 @@ export default function Login() {
     setSuccess('');
     try {
       const res = await axios.post('http://localhost:5000/api/auth/login', form);
-      localStorage.setItem('token', res.data.token);
+      localStorage.setItem('token', res.data.token); //after login success
       setSuccess('Login successful! Redirecting...');
       // Wait 1.5 sec then redirect
       setTimeout(() => navigate('/dashboard'), 1500);
