@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 
 import authRoutes from './routes/auth.js'; // Auth routes
 import protectedRoutes from './routes/protected.js'; // Protected routes
-
+import dashboardRoutes from './routes/dashboard.js';
 dotenv.config();
 
 const app = express();
@@ -21,8 +21,7 @@ mongoose.connect(process.env.MONGO_URI)
 // ✅ Use routes
 app.use('/api/auth', authRoutes);          // Auth endpoints
 app.use('/api', protectedRoutes);          // Protected test route
-
-// ✅ Default test route
+app.use('/api/dashboard', dashboardRoutes);// ✅ Default test route
 app.get('/', (req, res) => {
   res.send('API is running!');
 });
