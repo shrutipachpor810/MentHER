@@ -1,0 +1,15 @@
+# Node dependencies
+node_modules/
+
+# Env files
+server/.env
+client/.env
+
+# Logs
+*.log
+
+# Vite build
+dist/
+
+# OS stuff
+.DS_Store
