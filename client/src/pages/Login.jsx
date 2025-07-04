@@ -1,51 +1,93 @@
-import { useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+// src/pages/Login.jsx
 
-export default function Login() {
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import API from "../api";
+
+function Login() {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
   const navigate = useNavigate();
-  const [form, setForm] = useState({ email: '', password: '' });
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
-    setSuccess('');
+    setLoading(true);
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/login', form);
-      localStorage.setItem('token', res.data.token); //after login success
-      setSuccess('Login successful! Redirecting...');
-      // Wait 1.5 sec then redirect
-      setTimeout(() => navigate('/dashboard'), 1500);
-    } catch (err) {
-      console.error(err.response?.data || err);
-      setError(err.response?.data?.message || 'Login failed');
+      const res = await API.post("/auth/login", formData);
+      const { token, user } = res.data;
+
+      localStorage.setItem("token", token);
+      localStorage.setItem("name", user.name);
+      localStorage.setItem("role", user.role);
+      localStorage.setItem("email", user.email);
+
+      navigate("/welcome");
+    } catch (error) {
+      console.error(error.response?.data || error);
+      alert(error.response?.data?.message || "Login failed. Try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div style={{ padding: '20px' }}>
-      <h2>Login</h2>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      {success && <p style={{ color: 'green' }}>{success}</p>}
-      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-        <input
-          placeholder="Email"
-          type="email"
-          value={form.email}
-          onChange={e => setForm({ ...form, email: e.target.value })}
-          required
-        />
-        <input
-          placeholder="Password"
-          type="password"
-          value={form.password}
-          onChange={e => setForm({ ...form, password: e.target.value })}
-          required
-        />
-        <button type="submit">Login</button>
-      </form>
+    <div className="min-h-screen grid md:grid-cols-2 bg-pink-100">
+      {/* Left image */}
+      <div
+        className="hidden md:block bg-cover bg-center"
+        style={{ backgroundImage: "url('/hello.png')" }}
+      />
+
+      {/* Right form */}
+      <div className="flex items-center justify-center p-6">
+        <div className="border-4 border-pink-100 p-8 w-full max-w-md bg-white">
+          <h2 className="text-3xl font-bold text-center text-pink-600 mb-6">
+            Welcome Back ;)
+          </h2>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={formData.email}
+              onChange={handleChange}
+              className="w-full border border-pink-200 rounded-md px-4 py-2 focus:outline-none focus:border-pink-400"
+              required
+            />
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={formData.password}
+              onChange={handleChange}
+              className="w-full border border-pink-200 rounded-md px-4 py-2 focus:outline-none focus:border-pink-400"
+              required
+            />
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full bg-pink-500 text-white rounded-md px-4 py-2 hover:bg-pink-600 transition disabled:opacity-50"
+            >
+              {loading ? "Logging in..." : "Login"}
+            </button>
+          </form>
+          <p className="text-center mt-4 text-gray-600">
+            Don’t have an account?{" "}
+            <Link to="/signup" className="text-pink-500 hover:underline">
+              Sign Up
+            </Link>
+          </p>
+        </div>
+      </div>
     </div>
   );
 }
+
+export default Login;

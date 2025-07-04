@@ -1,31 +1,29 @@
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import { useEffect } from 'react';
-import axios from 'axios';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+
+
+import Landing from './pages/Landing';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
+import WelcomePage from './pages/WelcomePage';
+import MenteeDashboard from './mentee_dashboard/pages/MenteeDashboard';  // ✅ Corrected import
+import MentorDashboard from './mentee_dashboard/pages/MentorDashboard';
 
 function App() {
-  useEffect(() => {
-    axios.get('http://localhost:5000/')
-      .then(res => console.log(res.data))
-      .catch(err => console.error(err));
-  }, []);
-
   return (
     <Router>
-      <nav style={{ display: 'flex', gap: '20px', padding: '20px' }}>
-        <Link to="/login">Login</Link>
-        <Link to="/signup">Signup</Link>
-        <Link to="/dashboard">Dashboard</Link>
-
-      </nav>
-
+      <ToastContainer />
       <Routes>
-        <Route path="/" element={<h1>Women in Tech Mentorship</h1>} />
+        <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/welcome" element={<WelcomePage />} />
+        <Route path="/mentee-dashboard" element={<MenteeDashboard />} /> {/* ✅ Add this route */}
+        <Route path="/mentor-dashboard" element={<MentorDashboard />} />
       </Routes>
     </Router>
   );
