@@ -1,11 +1,10 @@
 import mongoose from 'mongoose';
 
 const bookingSchema = new mongoose.Schema({
-  mentor: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-  mentee: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  mentor: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  mentee: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   slot: { type: String, required: true },
-  status: { type: String, default: 'booked' }
+  status: { type: String, enum: ['booked', 'completed', 'cancelled'], default: 'booked' },
 }, { timestamps: true });
 
-const Booking = mongoose.model('Booking', bookingSchema);
-export default Booking;
+export default mongoose.model('Booking', bookingSchema);
