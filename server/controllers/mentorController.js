@@ -39,3 +39,26 @@ export const getMentorSlots = async (req, res) => {
     res.status(500).json({ message: 'Failed to fetch mentor slots' });
   }
 };
+
+export const updateMentorProfile = async (req, res) => {
+  try {
+    const mentorId = req.params.id; // e.g. /api/mentor/:id
+    const { name, qualification, bio, skills } = req.body;
+
+    // Find the mentor and update
+    const mentor = await User.findOneAndUpdate(
+      { _id: mentorId, role: 'mentor' },
+      { name, qualification, bio, skills },
+      { new: true }
+    ).select('-password');
+
+    if (!mentor) {
+      return res.status(404).json({ message: 'Mentor not found' });
+    }
+
+    res.json({ success: true, data: mentor });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Failed to update mentor profile' });
+  }
+};
