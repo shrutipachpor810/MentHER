@@ -7,3 +7,4 @@ router.get('/me', auth, getMyProfile);
 router.put('/me', auth, updateMyProfile);
 
 export default router;
+

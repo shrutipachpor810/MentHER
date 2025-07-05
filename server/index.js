@@ -9,6 +9,10 @@ import dashboardRoutes from './routes/dashboard.js';
 import userRoutes from './routes/users.js';
 import mentorRoutes from './routes/mentors.js';
 import bookingRoutes from './routes/bookings.js';
+import feedbackRoutes from './routes/feedback.js';
+import ratingRoutes from './routes/ratings.js';
+import noteRoutes from './routes/notes.js';
+import savedMentorRoutes from './routes/savedMentors.js';
 
 dotenv.config();
 
@@ -29,6 +33,10 @@ app.use('/api/dashboard', dashboardRoutes);// ✅ Default test route
 app.use('/api/users', userRoutes);
 app.use('/api/mentors', mentorRoutes);
 app.use('/api/bookings', bookingRoutes);
+app.use('/api/feedback', feedbackRoutes);
+app.use('/api/ratings', ratingRoutes);
+app.use('/api/notes', noteRoutes);
+app.use('/api/saved-mentors', savedMentorRoutes);
 
 app.get('/', (req, res) => {
   res.send('API is running!');
