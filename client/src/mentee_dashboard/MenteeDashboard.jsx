@@ -9,7 +9,7 @@ import UpcomingAppointments from "../components/UpcomingAppointments";
 import TimeSlots from "../components/TimeSlots";
 import ChatBot from "../components/ChatBot";
 import Feedback from "../components/Feedback";
-import getGreeting from "../../utils/getGreeting";
+import getGreeting from "../utils/getGreeting";
 import ProfileCorner from "../components/ProfileCorner"; // ✅ Profile bar
 
 const MenteeDashboard = () => {

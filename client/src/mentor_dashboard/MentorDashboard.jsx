@@ -7,7 +7,7 @@ import PastSessions from "../components/PastSessions";
 import FeedbackRatings from "../components/FeedbackRatings";
 import MentorNotes from "../components/MentorNotes";
 import ProfileCorner from "../components/ProfileCorner"; 
-import getGreeting from "../../utils/getGreeting";
+import getGreeting from "../utils/getGreeting";
 
 const greeting = getGreeting();
 const name = localStorage.getItem("name") || "Mentor";

@@ -11,13 +11,17 @@ export const getMyProfile = async (req, res) => {
 
 export const updateMyProfile = async (req, res) => {
   try {
+    console.log("Decoded user:", req.user); // ✅ Debug log
+
     const updatedUser = await User.findByIdAndUpdate(
       req.user.id,
       { ...req.body },
       { new: true }
     ).select('-password');
+
     res.json(updatedUser);
   } catch (err) {
+    console.error(err);
     res.status(500).json({ message: 'Error updating profile' });
   }
 };

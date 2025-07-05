@@ -9,8 +9,8 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
 import WelcomePage from './pages/WelcomePage';
-import MenteeDashboard from './mentee_dashboard/pages/MenteeDashboard';  // ✅ Corrected import
-import MentorDashboard from './mentee_dashboard/pages/MentorDashboard';
+import MenteeDashboard from './mentee_dashboard/MenteeDashboard';  // ✅ Corrected import
+import MentorDashboard from './mentor_dashboard/MentorDashboard';
 
 function App() {
   return (

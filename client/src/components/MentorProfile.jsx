@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 
 const MentorProfile = () => {
   const [name, setName] = useState("");
-  const [qualification, setQualification] = useState("");
   const [bio, setBio] = useState("");
   const [skills, setSkills] = useState("");
 
@@ -10,7 +9,7 @@ const MentorProfile = () => {
     const fetchProfile = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await fetch(`http://localhost:3001/api/user/me`, {
+        const response = await fetch(`http://localhost:5000/api/users/me`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -18,7 +17,6 @@ const MentorProfile = () => {
         const data = await response.json();
 
         setName(data.name || "");
-        setQualification(data.qualification || "");
         setBio(data.bio || "");
         setSkills(data.skills ? data.skills.join(", ") : "");
       } catch (error) {
@@ -33,27 +31,26 @@ const MentorProfile = () => {
     try {
       const token = localStorage.getItem('token');
 
-      const response = await fetch(`http://localhost:3001/api/user/me`, {
+      const response = await fetch(`http://localhost:5000/api/users/me`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
+          'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify({
           name,
-          qualification,
           bio,
           skills: skills.split(',').map(s => s.trim()),
         }),
       });
 
       const data = await response.json();
-      console.log(data);
+      console.log('Response from server:', data);
 
-      if (data.success) {
+      if (response.ok) {
         alert('Profile updated!');
       } else {
-        alert('Update failed');
+        alert(data.message || 'Update failed');
       }
     } catch (error) {
       console.error(error);
@@ -81,18 +78,7 @@ const MentorProfile = () => {
           />
         </div>
 
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Qualification
-          </label>
-          <input
-            type="text"
-            className="w-full px-3 py-2 border rounded"
-            value={qualification}
-            onChange={(e) => setQualification(e.target.value)}
-            placeholder="Your qualification"
-          />
-        </div>
+      
 
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
