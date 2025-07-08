@@ -1,12 +1,22 @@
 import express from 'express';
 import auth from '../middleware/auth.js';
-import { createBooking } from '../controllers/bookingController.js';
-import { getUpcomingBookings, getPastBookings } from '../controllers/bookingController.js';
+import {
+  createBooking,
+  getUpcomingBookings,
+  getPastBookings,
+  getUpcomingBookingsForMentor,
+  getPastBookingsForMentor
+} from '../controllers/bookingController.js';
 
 const router = express.Router();
 
-router.post('/', auth, createBooking); // mentee books a slot with mentor
+// ✅ Mentee routes
+router.post('/', auth, createBooking);
 router.get('/upcoming', auth, getUpcomingBookings);
 router.get('/past', auth, getPastBookings);
+
+// ✅ Mentor routes
+router.get('/mentor/upcoming', auth, getUpcomingBookingsForMentor);
+router.get('/mentor/past', auth, getPastBookingsForMentor);
 
 export default router;

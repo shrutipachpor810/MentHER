@@ -2,21 +2,26 @@
 
 import { useState, useRef, useEffect } from "react";
 import { FiLogOut } from "react-icons/fi";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const ProfileCorner = () => {
   const [open, setOpen] = useState(false);
+  const [profilePic, setProfilePic] = useState("");
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
+  const location = useLocation();
 
-  // Get user info from localStorage
   const name = localStorage.getItem("name") || "User";
   const email = localStorage.getItem("email") || "user@example.com";
-  const profilePic = localStorage.getItem("profilePic") || "";
-
   const initial = name.charAt(0).toUpperCase();
 
-  // Close dropdown on outside click
+  // Sync profilePic from localStorage on mount and on route change
+  useEffect(() => {
+    const storedPic = localStorage.getItem("profilePic");
+    setProfilePic(storedPic && storedPic !== "null" && storedPic !== "undefined" ? storedPic : "");
+  }, [location]);
+
+  // Close dropdown on outside click or ESC
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
@@ -56,7 +61,7 @@ const ProfileCorner = () => {
             className="w-10 h-10 rounded-full object-cover"
           />
         ) : (
-          initial
+          <span className="text-lg">{initial}</span>
         )}
       </button>
 
@@ -76,7 +81,7 @@ const ProfileCorner = () => {
               </div>
             )}
             <h3 className="text-lg font-semibold">{name}</h3>
-            <p className="text-sm text-gray-600 break-all">{email}</p>
+            <p className="text-sm text-gray-600 break-all text-center">{email}</p>
           </div>
           <button
             onClick={handleLogout}

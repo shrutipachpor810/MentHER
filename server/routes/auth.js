@@ -7,7 +7,7 @@ const router = express.Router();
 
 // Signup
 router.post('/signup', async (req, res) => {
-  const { name, email, password, role, bio, skills } = req.body; // ✅ Added bio & skills
+  const { name, email, password, role, bio, skills } = req.body;
 
   try {
     const existingUser = await User.findOne({ email });
@@ -42,6 +42,7 @@ router.post('/signup', async (req, res) => {
         id: newUser.id,
         name: newUser.name,
         role: newUser.role,
+        email: newUser.email,        // ✅ Added
       },
     });
   } catch (err) {
@@ -49,6 +50,7 @@ router.post('/signup', async (req, res) => {
   }
 });
 
+// Login
 // Login
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
@@ -71,11 +73,14 @@ router.post('/login', async (req, res) => {
         id: user.id,
         name: user.name,
         role: user.role,
+        email: user.email,
+        profilePic: user.profilePic || "", // ✅ Added
       },
     });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 });
+
 
 export default router;

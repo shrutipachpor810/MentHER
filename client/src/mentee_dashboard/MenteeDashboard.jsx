@@ -2,103 +2,133 @@
 
 import React, { useState } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
-import { FaCalendarAlt, FaClock, FaRobot, FaCommentDots } from "react-icons/fa";
+import { FaCalendarAlt, FaClock, FaRobot, FaCommentDots, FaUser } from "react-icons/fa";
 
-import AppointmentBooking from "../components/AppointmentBooking";
 import UpcomingAppointments from "../components/UpcomingAppointments";
 import TimeSlots from "../components/TimeSlots";
 import ChatBot from "../components/ChatBot";
 import Feedback from "../components/Feedback";
 import getGreeting from "../utils/getGreeting";
-import ProfileCorner from "../components/ProfileCorner"; // ✅ Profile bar
+import ProfileCorner from "../components/ProfileCorner";
+import MenteeProfile from "../components/MenteeProfile";
+import BookAppointmentPage from "../components/BookAppointmentPage";
 
 const MenteeDashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [selectedTab, setSelectedTab] = useState("appointments");
 
   const greeting = getGreeting();
   const name = localStorage.getItem("name") || "User";
 
-  return (
-    <div className="flex h-screen bg-pink-50 text-[#42383B] font-sans">
+  const tabs = [
+    { tab: "appointments", label: "Appointments", icon: <FaCalendarAlt /> },
+    { tab: "timeslots", label: "Time Slots", icon: <FaClock /> },
+    { tab: "chatbot", label: "ChatBot", icon: <FaRobot /> },
+    { tab: "feedback", label: "Feedback", icon: <FaCommentDots /> },
+    { tab: "profile", label: "Profile", icon: <FaUser /> },
+  ];
 
+  return (
+    <div className="flex h-screen bg-gradient-to-b from-[#FFF5F5] to-[#FFF0F3] text-[#42383B] font-sans">
       {/* Sidebar */}
       <aside
-        className={`bg-[#FFE5D9] p-4 transition-all duration-300 ease-in-out ${
-          sidebarOpen ? "w-52" : "w-16"
+        className={`bg-[#89B0AE] text-white p-4 transition-all duration-300 ease-in-out ${
+          sidebarOpen ? "w-56" : "w-16"
         }`}
       >
         <button
           onClick={() => setSidebarOpen(!sidebarOpen)}
-          className="mb-6 transition-transform duration-300"
+          className="mb-6 focus:outline-none"
         >
-          {sidebarOpen ? <FiX size={24} /> : <FiMenu size={24} />}
+          {sidebarOpen ? <FiX size={22} /> : <FiMenu size={22} />}
         </button>
 
         {sidebarOpen && (
-          <h2 className="text-xl font-bold mb-6 transition-opacity duration-300">MentHer</h2>
+          <h2 className="text-xl font-bold mb-6">MentHer</h2>
         )}
 
-        <nav className="space-y-4 text-sm">
-          <a href="#appointments" className="flex items-center gap-2 hover:bg-pink-100 p-2 rounded-md transition-colors">
-            <FaCalendarAlt /> {sidebarOpen && "Appointments"}
-          </a>
-          <a href="#timeslots" className="flex items-center gap-2 hover:bg-pink-100 p-2 rounded-md transition-colors">
-            <FaClock /> {sidebarOpen && "Time Slots"}
-          </a>
-          <a href="#chatbot" className="flex items-center gap-2 hover:bg-pink-100 p-2 rounded-md transition-colors">
-            <FaRobot /> {sidebarOpen && "ChatBot"}
-          </a>
-          <a href="#feedback" className="flex items-center gap-2 hover:bg-pink-100 p-2 rounded-md transition-colors">
-            <FaCommentDots /> {sidebarOpen && "Feedback"}
-          </a>
+        <nav className="flex flex-col justify-between h-[80vh]">
+          <div className="space-y-2">
+            {tabs.map(({ tab, label, icon }) => (
+              <button
+                key={tab}
+                onClick={() => setSelectedTab(tab)}
+                className={`flex items-center gap-2 p-2 rounded-md transition-colors w-full text-left ${
+                  selectedTab === tab
+                    ? "bg-[#6FA1A0] font-semibold shadow"
+                    : "hover:bg-[#7FAFAE]"
+                }`}
+              >
+                {icon} {sidebarOpen && <span>{label}</span>}
+              </button>
+            ))}
+          </div>
         </nav>
       </aside>
 
       {/* Main Content */}
       <main className="flex-1 flex flex-col overflow-y-auto">
         {/* Top Navbar */}
-        <div className="p-4 border-b bg-white flex justify-between items-center sticky top-0 z-10">
+        <div className="p-4 bg-white border-b flex justify-between items-center sticky top-0 z-10">
           <div>
-            <h2 className="text-lg font-semibold">{greeting}, {name}!</h2>
-            <p className="text-sm text-gray-500">Empowering women in tech, one connection at a time.</p>
+            <h2 className="text-lg font-semibold">
+              {greeting}, {name}!
+            </h2>
+            <p className="text-sm text-gray-500">Ready to grow your skills today?</p>
           </div>
           <div className="flex items-center gap-4">
             <input
               type="text"
               placeholder="Search mentors, topics..."
-              className="border rounded-md px-3 py-1 text-sm w-48 md:w-64 focus:outline-none focus:ring-2 focus:ring-pink-300"
+              className="border rounded-full px-4 py-1.5 text-sm w-48 md:w-64 focus:outline-none focus:ring-2 focus:ring-[#FFADAD]"
             />
-            <ProfileCorner /> {/* ✅ Profile bar added */}
+            <ProfileCorner />
           </div>
         </div>
 
-        {/* Dashboard Grid */}
-        <div className="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 overflow-y-auto">
+        {/* Dashboard Content */}
+        <div className="p-6 space-y-6">
+          {selectedTab === "appointments" && (
+            <>
+              <section className="bg-white p-5 rounded-xl shadow hover:shadow-lg transition">
+                <h3 className="text-lg font-semibold mb-3 text-[#42383B]">Book a Session</h3>
+                <BookAppointmentPage />
+              </section>
 
-          {/* Appointments */}
-          <section id="appointments" className="bg-white p-4 rounded-lg shadow col-span-1 md:col-span-2">
-            <h3 className="text-lg font-semibold mb-2">Appointments</h3>
-            <AppointmentBooking />
-            <UpcomingAppointments />
-          </section>
+              <section className="bg-white p-5 rounded-xl shadow hover:shadow-lg transition">
+                <h3 className="text-lg font-semibold mb-3 text-[#42383B]">Your Appointments</h3>
+                <UpcomingAppointments />
+              </section>
+            </>
+          )}
 
-          {/* Time Slots */}
-          <section id="timeslots" className="bg-white p-4 rounded-lg shadow">
-            <h3 className="text-lg font-semibold mb-2">Available Time Slots</h3>
-            <TimeSlots />
-          </section>
+          {selectedTab === "timeslots" && (
+            <section className="bg-white p-5 rounded-xl shadow hover:shadow-lg transition">
+              <h3 className="text-lg font-semibold mb-3 text-[#42383B]">Available Time Slots</h3>
+              <TimeSlots />
+            </section>
+          )}
 
-          {/* ChatBot */}
-          <section id="chatbot" className="bg-white p-4 rounded-lg shadow">
-            <h3 className="text-lg font-semibold mb-2">ChatBot</h3>
-            <ChatBot />
-          </section>
+          {selectedTab === "chatbot" && (
+            <section className="bg-white p-5 rounded-xl shadow hover:shadow-lg transition">
+              <h3 className="text-lg font-semibold mb-3 text-[#42383B]">ChatBot</h3>
+              <ChatBot />
+            </section>
+          )}
 
-          {/* Feedback */}
-          <section id="feedback" className="bg-white p-4 rounded-lg shadow">
-            <h3 className="text-lg font-semibold mb-2">Feedback</h3>
-            <Feedback />
-          </section>
+          {selectedTab === "feedback" && (
+            <section className="bg-white p-5 rounded-xl shadow hover:shadow-lg transition">
+              <h3 className="text-lg font-semibold mb-3 text-[#42383B]">Feedback</h3>
+              <Feedback />
+            </section>
+          )}
+
+          {selectedTab === "profile" && (
+            <section className="bg-white p-5 rounded-xl shadow hover:shadow-lg transition">
+              <h3 className="text-lg font-semibold mb-3 text-[#42383B]">Your Profile</h3>
+              <MenteeProfile />
+            </section>
+          )}
         </div>
       </main>
     </div>

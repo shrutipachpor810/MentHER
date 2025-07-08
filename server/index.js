@@ -15,7 +15,10 @@ import feedbackRoutes from './routes/feedback.js';
 import ratingRoutes from './routes/ratings.js';
 import noteRoutes from './routes/notes.js';
 import savedMentorRoutes from './routes/savedMentors.js';
-import chatRoutes from './routes/chat.js';
+import chatRoutes from './routes/chatRoutes.js';  // ✅ using consistent name
+import profileRoutes from './routes/profile.js';
+import menteeRoutes from './routes/mentees.js';
+import timeSlotRoutes from "./routes/timeSlotRoutes.js";
 
 import { createServer } from 'http';
 import { Server } from 'socket.io';
@@ -43,6 +46,10 @@ app.use('/api/ratings', ratingRoutes);
 app.use('/api/notes', noteRoutes);
 app.use('/api/saved-mentors', savedMentorRoutes);
 app.use('/api/chat', chatRoutes);
+app.use('/uploads', express.static('uploads'));
+app.use('/api/profile', profileRoutes);
+app.use('/api/mentees', menteeRoutes);
+app.use("/api/timeslots", timeSlotRoutes);
 
 app.get('/', (req, res) => {
   res.send('API is running!');

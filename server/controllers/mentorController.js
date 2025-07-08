@@ -1,51 +1,57 @@
 import User from '../models/User.js';
 
+// ✅ Fetch all mentors (with optional filtering)
 export const getMentors = async (req, res) => {
   try {
     const { skills, minExp } = req.query;
 
-    let query = { role: 'mentor' };
+    const query = { role: 'mentor' };
 
     if (skills) {
-      query.skills = { $in: skills.split(',') };
+      query.skills = { $in: skills.split(',') }; // supports multi-skill filtering
     }
 
     if (minExp) {
-      query.experience = { $gte: Number(minExp) };
+      query.experience = { $gte: Number(minExp) }; // filters mentors with experience >= minExp
     }
 
     const mentors = await User.find(query).select('-password');
-    res.json(mentors);
+
+    res.status(200).json({ success: true, mentors });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: 'Failed to fetch mentors' });
+    console.error('Error in getMentors:', err);
+    res.status(500).json({ success: false, message: 'Failed to fetch mentors' });
   }
 };
 
+// ✅ Get specific mentor's available slots
 export const getMentorSlots = async (req, res) => {
   try {
     const mentorId = req.params.id;
 
-    // ⛳️ FIX: Add 'role' to the fields being selected
     const mentor = await User.findById(mentorId).select('availability name role');
 
     if (!mentor || mentor.role !== 'mentor') {
-      return res.status(404).json({ message: 'Mentor not found' });
+      return res.status(404).json({ success: false, message: 'Mentor not found' });
     }
 
-    res.json({ mentorName: mentor.name, availableSlots: mentor.availability });
+    res.status(200).json({
+      success: true,
+      mentorName: mentor.name,
+      availableSlots: mentor.availability || [],
+    });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: 'Failed to fetch mentor slots' });
+    console.error('Error in getMentorSlots:', err);
+    res.status(500).json({ success: false, message: 'Failed to fetch mentor slots' });
   }
 };
 
+// ✅ Update mentor profile
 export const updateMentorProfile = async (req, res) => {
   try {
-    const mentorId = req.params.id; // e.g. /api/mentor/:id
+    const mentorId = req.params.id;
     const { name, qualification, bio, skills } = req.body;
 
-    // Find the mentor and update
     const mentor = await User.findOneAndUpdate(
       { _id: mentorId, role: 'mentor' },
       { name, qualification, bio, skills },
@@ -53,12 +59,12 @@ export const updateMentorProfile = async (req, res) => {
     ).select('-password');
 
     if (!mentor) {
-      return res.status(404).json({ message: 'Mentor not found' });
+      return res.status(404).json({ success: false, message: 'Mentor not found' });
     }
 
-    res.json({ success: true, data: mentor });
+    res.status(200).json({ success: true, mentor });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: 'Failed to update mentor profile' });
+    console.error('Error in updateMentorProfile:', err);
+    res.status(500).json({ success: false, message: 'Failed to update mentor profile' });
   }
 };

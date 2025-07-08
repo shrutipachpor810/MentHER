@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import BookAppointmentPage from "./components/BookAppointmentPage";
 
 
 
@@ -24,6 +25,7 @@ function App() {
         <Route path="/welcome" element={<WelcomePage />} />
         <Route path="/mentee-dashboard" element={<MenteeDashboard />} /> {/* ✅ Add this route */}
         <Route path="/mentor-dashboard" element={<MentorDashboard />} />
+        <Route path="/book-appointment" element={<BookAppointmentPage />} />
       </Routes>
     </Router>
   );
