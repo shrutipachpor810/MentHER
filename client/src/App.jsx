@@ -1,9 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
-
-
 import Landing from './pages/Landing';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
@@ -11,6 +8,10 @@ import Dashboard from './pages/Dashboard';
 import WelcomePage from './pages/WelcomePage';
 import MenteeDashboard from './mentee_dashboard/MenteeDashboard';  // ✅ Corrected import
 import MentorDashboard from './mentor_dashboard/MentorDashboard';
+import ChatBot from "./components/ChatBot"; // New page for ChatBot!
+import Feedback from "./components/Feedback";
+import TimeSlots from './components/TimeSlots';
+import AppointmentPage from './components/AppointmentPage';
 
 function App() {
   return (
@@ -23,7 +24,12 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/welcome" element={<WelcomePage />} />
         <Route path="/mentee-dashboard" element={<MenteeDashboard />} /> {/* ✅ Add this route */}
+        <Route path="/chatbot" element={<ChatBot/>} />
+        <Route path="/feedback" element={<Feedback/>} />
+        <Route path="/timeslots" element={<TimeSlots/>} />
+        <Route path="/appointment/:mentorId" element={<AppointmentPage/>} />
         <Route path="/mentor-dashboard" element={<MentorDashboard />} />
+
       </Routes>
     </Router>
   );

@@ -10,6 +10,7 @@ function Signup() {
     role: "mentee",
     bio: "",
     skills: "",
+    availability: "", // ✅ Add this field
   });
 
   const navigate = useNavigate();
@@ -33,7 +34,12 @@ function Signup() {
 
       if (formData.role === "mentor") {
         dataToSend.bio = formData.bio;
-        dataToSend.skills = formData.skills.split(",").map((s) => s.trim());
+        dataToSend.skills = formData.skills
+          .split(",")
+          .map((s) => s.trim());
+        dataToSend.availability = formData.availability
+          .split(",")
+          .map((s) => s.trim());
       }
 
       const res = await API.post("/auth/signup", dataToSend);
@@ -129,6 +135,16 @@ function Signup() {
                   name="skills"
                   placeholder="Skills (comma separated)"
                   value={formData.skills}
+                  onChange={handleChange}
+                  required
+                  className="w-full border border-pink-200 rounded-md px-4 py-2 focus:outline-none focus:border-pink-400"
+                />
+
+                <input
+                  type="text"
+                  name="availability"
+                  placeholder="Availability slots (comma separated)"
+                  value={formData.availability}
                   onChange={handleChange}
                   required
                   className="w-full border border-pink-200 rounded-md px-4 py-2 focus:outline-none focus:border-pink-400"

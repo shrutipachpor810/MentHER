@@ -16,6 +16,7 @@ import savedMentorRoutes from './routes/savedMentors.js';
 import chatRoutes from './routes/chatRoutes.js';
 
 
+
 const app = express();
 
 app.use(cors());
@@ -38,6 +39,7 @@ app.use('/api/ratings', ratingRoutes);
 app.use('/api/notes', noteRoutes);
 app.use('/api/saved-mentors', savedMentorRoutes);
 app.use('/api/chat', chatRoutes);
+
 
 app.get('/', (req, res) => {
   res.send('API is running!');

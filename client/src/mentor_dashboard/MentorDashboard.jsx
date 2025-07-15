@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { FaCalendarAlt, FaClock, FaStar, FaStickyNote, FaUserCircle } from "react-icons/fa";
 import MentorProfile from "../components/MentorProfile";
 import AvailabilitySlots from "../components/AvailabilitySlots";
-import UpcomingBookings from "../components/UpcomingBookings";
-import PastSessions from "../components/PastSessions";
-import FeedbackRatings from "../components/FeedbackRatings";
+import MentorUpcomingBookings from "../components/MentorUpcomingBookings";
+import MentorPastBookings from "../components/MentorPastBookings";
+import MentorFeedbackAndRatings from "../components/MentorFeedbackAndRatings";
 import MentorNotes from "../components/MentorNotes";
 import ProfileCorner from "../components/ProfileCorner"; 
 import getGreeting from "../utils/getGreeting";
@@ -108,21 +108,21 @@ const MentorDashboard = () => {
           {selectedPage === "upcoming" && (
             <section className="bg-white p-4 rounded-lg shadow">
               <h3 className="text-lg font-semibold mb-2">Upcoming Bookings</h3>
-              <UpcomingBookings />
+              <MentorUpcomingBookings />
             </section>
           )}
 
           {selectedPage === "past" && (
             <section className="bg-white p-4 rounded-lg shadow">
               <h3 className="text-lg font-semibold mb-2">Past Sessions</h3>
-              <PastSessions />
+              <MentorPastBookings />
             </section>
           )}
 
           {selectedPage === "feedback" && (
             <section className="bg-white p-4 rounded-lg shadow">
               <h3 className="text-lg font-semibold mb-2">Feedback & Ratings</h3>
-              <FeedbackRatings />
+              <MentorFeedbackAndRatings />
             </section>
           )}
 

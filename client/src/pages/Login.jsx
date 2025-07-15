@@ -22,11 +22,12 @@ function Login() {
     try {
       const res = await API.post("/auth/login", formData);
       const { token, user } = res.data;
-
+      localStorage.setItem("userId", res.data.user.id);  // <-- critical
       localStorage.setItem("token", token);
       localStorage.setItem("name", user.name);
       localStorage.setItem("role", user.role);
       localStorage.setItem("email", user.email);
+       
 
       navigate("/welcome");
     } catch (error) {

@@ -5,9 +5,9 @@ import User from '../models/User.js';
 
 const router = express.Router();
 
-// Signup
+// ✅ SIGNUP
 router.post('/signup', async (req, res) => {
-  const { name, email, password, role, bio, skills } = req.body; // ✅ Added bio & skills
+  const { name, email, password, role, bio, skills, availability } = req.body;
 
   try {
     const existingUser = await User.findOne({ email });
@@ -25,13 +25,14 @@ router.post('/signup', async (req, res) => {
     if (role === 'mentor') {
       newUserData.bio = bio || "";
       newUserData.skills = skills || [];
+      newUserData.availability = availability || [];
     }
 
     const newUser = new User(newUserData);
     await newUser.save();
 
     const token = jwt.sign(
-      { id: newUser.id, role: newUser.role },
+      { id: newUser._id, role: newUser.role },
       process.env.JWT_SECRET,
       { expiresIn: '1d' }
     );
@@ -39,19 +40,21 @@ router.post('/signup', async (req, res) => {
     res.status(201).json({
       token,
       user: {
-        id: newUser.id,
+        id: newUser._id,
         name: newUser.name,
         role: newUser.role,
       },
     });
   } catch (err) {
+    console.error(err);
     res.status(500).json({ message: err.message });
   }
 });
 
-// Login
+// ✅ LOGIN
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
+
   try {
     const user = await User.findOne({ email });
     if (!user) return res.status(400).json({ message: 'Invalid credentials' });
@@ -60,7 +63,7 @@ router.post('/login', async (req, res) => {
     if (!validPassword) return res.status(400).json({ message: 'Invalid credentials' });
 
     const token = jwt.sign(
-      { id: user.id, role: user.role },
+      { id: user._id, role: user.role },
       process.env.JWT_SECRET,
       { expiresIn: '1d' }
     );
@@ -68,13 +71,46 @@ router.post('/login', async (req, res) => {
     res.status(200).json({
       token,
       user: {
-        id: user.id,
+        id: user._id,
         name: user.name,
         role: user.role,
       },
     });
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    console.error(err);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// ✅ ✅ ✅ GET /me (with availability)
+router.get('/me', async (req, res) => {
+  const token = req.header('Authorization')?.split(' ')[1];
+  if (!token) {
+    return res.status(401).json({ message: 'No token, access denied' });
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const user = await User.findById(decoded.id).select('-password');
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.json({
+      user: {
+        id: user._id,
+        name: user.name,
+        role: user.role,
+        email: user.email,
+        bio: user.bio,
+        skills: user.skills,
+        availability: user.availability || [],
+      },
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(400).json({ message: 'Invalid token' });
   }
 });
 
