@@ -43,15 +43,15 @@ const MenteeDashboard = () => {
     <div className="flex h-screen bg-pink-50 text-[#42383B] font-sans">
       {/* Sidebar */}
       <aside
-        className={`bg-[#FFE5D9] p-4 transition-all duration-300 ease-in-out ${
-          sidebarOpen ? "w-52" : "w-16"
+        className={`bg-[#89B0AE] text-white p-4 transition-all duration-300 ease-in-out ${
+          sidebarOpen ? "w-56" : "w-16"
         }`}
       >
         <button
           onClick={() => setSidebarOpen(!sidebarOpen)}
-          className="mb-6 transition-transform duration-300"
+          className="mb-6 focus:outline-none"
         >
-          {sidebarOpen ? <FiX size={24} /> : <FiMenu size={24} />}
+          {sidebarOpen ? <FiX size={22} /> : <FiMenu size={22} />}
         </button>
 
         {sidebarOpen && (

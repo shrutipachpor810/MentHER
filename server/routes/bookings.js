@@ -6,7 +6,8 @@ import { getUpcomingBookings, getPastBookings, getMentorUpcomingBookings, getMen
 
 const router = express.Router();
 
-router.post('/', auth, createBooking); // mentee books a slot with mentor
+// ✅ Mentee routes
+router.post('/', auth, createBooking);
 router.get('/upcoming', auth, getUpcomingBookings);
 router.get('/past', auth, getPastBookings);
 router.get('/mentor/upcoming', auth, getMentorUpcomingBookings);

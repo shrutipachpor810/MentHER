@@ -43,6 +43,7 @@ router.post('/signup', async (req, res) => {
         id: newUser._id,
         name: newUser.name,
         role: newUser.role,
+        email: newUser.email,        // ✅ Added
       },
     });
   } catch (err) {
@@ -51,7 +52,12 @@ router.post('/signup', async (req, res) => {
   }
 });
 
+<<<<<<< HEAD
 // ✅ LOGIN
+=======
+// Login
+// Login
+>>>>>>> 2f4cb43647bf04d6b7578efcf38f35595458946c
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
@@ -74,6 +80,8 @@ router.post('/login', async (req, res) => {
         id: user._id,
         name: user.name,
         role: user.role,
+        email: user.email,
+        profilePic: user.profilePic || "", // ✅ Added
       },
     });
   } catch (err) {
@@ -113,5 +121,6 @@ router.get('/me', async (req, res) => {
     res.status(400).json({ message: 'Invalid token' });
   }
 });
+
 
 export default router;

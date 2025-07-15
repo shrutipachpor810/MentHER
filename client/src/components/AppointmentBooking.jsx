@@ -1,11 +1,22 @@
+// src/mentee_dashboard/components/AppointmentBooking.jsx
+
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const AppointmentBooking = () => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/book-appointment");
+  };
+
   return (
-    <div className="bg-white p-6 shadow-md rounded-lg">
-      <h3 className="text-2xl font-semibold mb-4">Book Appointment</h3>
-      {/* Form or Calendar component to book appointment */}
-      <p>[Appointment booking form here]</p>
+    <div
+      onClick={handleClick}
+      className="bg-[#FDFDFD] p-6 shadow-md rounded-lg cursor-pointer hover:bg-[#D8E2DC] transition-colors"
+    >
+      <h3 className="text-2xl font-semibold mb-2">Book Appointment</h3>
+      <p className="text-sm text-gray-500">Click here to schedule a session with your mentor.</p>
     </div>
   );
 };

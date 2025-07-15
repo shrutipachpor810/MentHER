@@ -7,7 +7,8 @@ const userSchema = new mongoose.Schema({
   role: { type: String, enum: ['mentor', 'mentee'], required: true },
   bio: { type: String, default: '' },
   skills: { type: [String], default: [] },
-  availability: [{ type: String }]
+  availability: [{ type: String }],
+  profilePic: { type: String, default: "" }, // ✅ Add this line
 }, { timestamps: true });
 
 export default mongoose.model('User', userSchema);

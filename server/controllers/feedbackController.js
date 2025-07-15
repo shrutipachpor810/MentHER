@@ -1,5 +1,9 @@
-import Feedback from '../models/Feedback.js';
+// controllers/feedbackController.js
 
+import Feedback from '../models/Feedback.js';
+import Booking from '../models/Booking.js';
+
+// ✅ Submit feedback by mentee
 export const submitFeedback = async (req, res) => {
   const { bookingId } = req.params;
   const { feedback } = req.body;
@@ -13,6 +17,7 @@ export const submitFeedback = async (req, res) => {
     await newFeedback.save();
     res.status(201).json({ message: 'Feedback submitted' });
   } catch (err) {
+    console.error(err);
     res.status(500).json({ message: 'Error submitting feedback' });
   }
 };

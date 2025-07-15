@@ -1,4 +1,4 @@
-import Booking from '../models/Booking.js';
+// backend/controllers/bookingController.js
 
 /**
  * Create a new booking — mentee books a session with mentor
