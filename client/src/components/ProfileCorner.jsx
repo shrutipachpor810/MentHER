@@ -1,7 +1,6 @@
 // src/components/ProfileCorner.jsx
-
 import { useState, useRef, useEffect } from "react";
-import { FiLogOut } from "react-icons/fi";
+import { FiLogOut, FiUser, FiSettings, FiChevronDown } from "react-icons/fi";
 import { useNavigate, useLocation } from "react-router-dom";
 
 const ProfileCorner = () => {
@@ -10,9 +9,9 @@ const ProfileCorner = () => {
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
   const location = useLocation();
-
   const name = localStorage.getItem("name") || "User";
   const email = localStorage.getItem("email") || "user@example.com";
+  const role = localStorage.getItem("role") || "user";
   const initial = name.charAt(0).toUpperCase();
 
   // Sync profilePic from localStorage on mount and on route change
@@ -51,44 +50,82 @@ const ProfileCorner = () => {
       {/* Profile Button */}
       <button
         onClick={() => setOpen(!open)}
-        className="flex items-center justify-center w-10 h-10 rounded-full bg-pink-200 text-pink-700 font-bold hover:bg-pink-300 transition"
+        className="flex items-center space-x-2 bg-white border border-[#F4ACB7]/30 rounded-full px-3 py-2 shadow-sm hover:shadow-md transition-shadow"
         aria-label="Toggle Profile Menu"
       >
         {profilePic ? (
           <img
             src={profilePic}
             alt="Profile"
-            className="w-10 h-10 rounded-full object-cover"
+            className="w-8 h-8 rounded-full object-cover"
           />
         ) : (
-          <span className="text-lg">{initial}</span>
+          <div className="w-8 h-8 rounded-full bg-[#F4ACB7] flex items-center justify-center text-white font-bold">
+            {initial}
+          </div>
         )}
+        <div className="hidden md:block text-left">
+          <p className="text-sm font-medium text-[#4B2E38] truncate max-w-[100px]">{name}</p>
+          <p className="text-xs text-[#85586F]">{role}</p>
+        </div>
+        <FiChevronDown className={`text-[#85586F] transition-transform ${open ? 'rotate-180' : ''}`} />
       </button>
 
       {/* Dropdown */}
       {open && (
-        <div className="absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-xl z-50 p-4">
-          <div className="flex flex-col items-center">
-            {profilePic ? (
-              <img
-                src={profilePic}
-                alt="Profile"
-                className="w-20 h-20 rounded-full object-cover mb-2"
-              />
-            ) : (
-              <div className="w-20 h-20 rounded-full bg-pink-200 text-pink-700 flex items-center justify-center text-4xl font-bold mb-2">
-                {initial}
+        <div className="absolute right-0 mt-3 w-72 bg-white rounded-xl shadow-xl z-50 border border-[#F4ACB7]/20 overflow-hidden">
+          {/* Profile Header */}
+          <div className="bg-gradient-to-r from-[#F4ACB7] to-[#FFB5C5] p-6 text-white">
+            <div className="flex items-center space-x-4">
+              {profilePic ? (
+                <img
+                  src={profilePic}
+                  alt="Profile"
+                  className="w-16 h-16 rounded-full object-cover border-2 border-white"
+                />
+              ) : (
+                <div className="w-16 h-16 rounded-full bg-white/30 flex items-center justify-center text-2xl font-bold border-2 border-white">
+                  {initial}
+                </div>
+              )}
+              <div>
+                <h3 className="text-lg font-bold">{name}</h3>
+                <p className="text-sm opacity-90">{email}</p>
+                <span className="inline-block mt-1 bg-white/20 text-xs px-2 py-1 rounded-full">
+                  {role.charAt(0).toUpperCase() + role.slice(1)}
+                </span>
               </div>
-            )}
-            <h3 className="text-lg font-semibold">{name}</h3>
-            <p className="text-sm text-gray-600 break-all text-center">{email}</p>
+            </div>
           </div>
-          <button
-            onClick={handleLogout}
-            className="mt-4 w-full flex items-center justify-center gap-2 px-4 py-2 bg-pink-500 text-white rounded-md hover:bg-pink-600 transition"
-          >
-            <FiLogOut /> Logout
-          </button>
+
+          {/* Menu Items */}
+          <div className="p-2">
+            <button className="flex items-center space-x-3 w-full p-3 rounded-lg hover:bg-[#FFE5D9] transition-colors text-[#4B2E38]">
+              <div className="w-8 h-8 rounded-full bg-[#F4ACB7]/20 flex items-center justify-center">
+                <FiUser className="text-[#4B2E38]" />
+              </div>
+              <span className="font-medium">View Profile</span>
+            </button>
+            
+            <button className="flex items-center space-x-3 w-full p-3 rounded-lg hover:bg-[#FFE5D9] transition-colors text-[#4B2E38]">
+              <div className="w-8 h-8 rounded-full bg-[#F4ACB7]/20 flex items-center justify-center">
+                <FiSettings className="text-[#4B2E38]" />
+              </div>
+              <span className="font-medium">Settings</span>
+            </button>
+            
+            <div className="border-t border-[#F4ACB7]/20 my-2"></div>
+            
+            <button
+              onClick={handleLogout}
+              className="flex items-center space-x-3 w-full p-3 rounded-lg hover:bg-[#FFE5D9] transition-colors text-[#4B2E38]"
+            >
+              <div className="w-8 h-8 rounded-full bg-[#F4ACB7]/20 flex items-center justify-center">
+                <FiLogOut className="text-[#4B2E38]" />
+              </div>
+              <span className="font-medium">Logout</span>
+            </button>
+          </div>
         </div>
       )}
     </div>

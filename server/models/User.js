@@ -7,8 +7,11 @@ const userSchema = new mongoose.Schema({
   role: { type: String, enum: ['mentor', 'mentee'], required: true },
   bio: { type: String, default: '' },
   skills: { type: [String], default: [] },
-  availability: [{ type: String }],
-  profilePic: { type: String, default: "" }, // ✅ Add this line
+  
+  // Store availability as an array of strings (can later convert to date objects if needed)
+  availability: { type: [String], default: [] },
+
+  profilePic: { type: String, default: "" }
 }, { timestamps: true });
 
 export default mongoose.model('User', userSchema);

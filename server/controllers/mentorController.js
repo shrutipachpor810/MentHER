@@ -1,16 +1,16 @@
-import User from '../models/User.js';
+import User from "../models/User.js";
 
 // ✅ Get mentor by ID
 export const getMentorById = async (req, res) => {
   try {
-    const mentor = await User.findById(req.params.id).select('-password');
-    if (!mentor || mentor.role !== 'mentor') {
-      return res.status(404).json({ message: 'Mentor not found' });
+    const mentor = await User.findById(req.params.id).select("-password");
+    if (!mentor || mentor.role !== "mentor") {
+      return res.status(404).json({ message: "Mentor not found" });
     }
     res.json(mentor);
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: 'Failed to get mentor' });
+    console.error("Error in getMentorById:", err);
+    res.status(500).json({ message: "Failed to get mentor" });
   }
 };
 
@@ -18,116 +18,125 @@ export const getMentorById = async (req, res) => {
 export const getMentors = async (req, res) => {
   try {
     const { skills, search } = req.query;
-    let query = { role: 'mentor' };
+    let query = { role: "mentor" };
 
     if (skills) {
-      query.skills = { $in: skills.split(',') }; // supports multi-skill filtering
+      query.skills = { $in: skills.split(",") };
     }
 
     if (search) {
       query.$or = [
-        { name: { $regex: search, $options: 'i' } },
-        { bio: { $regex: search, $options: 'i' } },
-        { skills: { $elemMatch: { $regex: search, $options: 'i' } } },
+        { name: { $regex: search, $options: "i" } },
+        { bio: { $regex: search, $options: "i" } },
+        { skills: { $elemMatch: { $regex: search, $options: "i" } } },
       ];
     }
 
-    const mentors = await User.find(query).select('-password');
-
+    const mentors = await User.find(query).select("-password");
     res.status(200).json({ success: true, mentors });
   } catch (err) {
-    console.error('Error in getMentors:', err);
-    res.status(500).json({ success: false, message: 'Failed to fetch mentors' });
+    console.error("Error in getMentors:", err);
+    res.status(500).json({ success: false, message: "Failed to fetch mentors" });
   }
 };
 
-// ✅ Get a mentor's slots by ID (for mentees to view)
-export const getMentorSlots = async (req, res) => {
-  try {
-    const mentorId = req.params.id;
-    const mentor = await User.findById(mentorId).select('availability name role');
-
-    if (!mentor || mentor.role !== 'mentor') {
-      return res.status(404).json({ success: false, message: 'Mentor not found' });
-    }
-
-    res.status(200).json({
-      success: true,
-      mentorName: mentor.name,
-      availableSlots: mentor.availability || [],
-    });
-  } catch (err) {
-    console.error('Error in getMentorSlots:', err);
-    res.status(500).json({ success: false, message: 'Failed to fetch mentor slots' });
-  }
-};
-
-// ✅ Update mentor profile by ID (if needed)
+// ✅ Update mentor profile
 export const updateMentorProfile = async (req, res) => {
   try {
     const mentorId = req.params.id;
     const { name, qualification, bio, skills } = req.body;
 
     const mentor = await User.findOneAndUpdate(
-      { _id: mentorId, role: 'mentor' },
+      { _id: mentorId, role: "mentor" },
       { name, qualification, bio, skills },
       { new: true }
-    ).select('-password');
+    ).select("-password");
 
     if (!mentor) {
-      return res.status(404).json({ success: false, message: 'Mentor not found' });
+      return res.status(404).json({ success: false, message: "Mentor not found" });
     }
 
     res.status(200).json({ success: true, mentor });
   } catch (err) {
-    console.error('Error in updateMentorProfile:', err);
-    res.status(500).json({ success: false, message: 'Failed to update mentor profile' });
+    console.error("Error in updateMentorProfile:", err);
+    res.status(500).json({ success: false, message: "Failed to update mentor profile" });
   }
 };
 
-// ✅ Add availability slots (uses JWT!)
+// ✅ Add availability slot(s)
 export const addAvailability = async (req, res) => {
   try {
-    const { slots } = req.body; // slots = array of strings
+    const mentorId = req.user.id;
+    let { slot, slots } = req.body;
 
-    if (!Array.isArray(slots) || slots.length === 0) {
-      return res.status(400).json({ message: 'Slots must be a non-empty array.' });
+    if (!slot && !slots) {
+      return res.status(400).json({ success: false, message: "Slot is required" });
     }
 
-    // 👉 Always get mentor by JWT
-    const mentor = await User.findById(req.user.id);
+    // Normalize slots into an array
+    let newSlots = [];
+    if (slot) newSlots.push(slot);
+    if (Array.isArray(slots)) newSlots = [...newSlots, ...slots];
 
-    if (!mentor || mentor.role !== 'mentor') {
-      return res.status(404).json({ message: 'Mentor not found' });
+    const mentor = await User.findById(mentorId);
+    if (!mentor || mentor.role !== "mentor") {
+      return res.status(404).json({ success: false, message: "Mentor not found" });
     }
 
-    mentor.availability.push(...slots);
+    // Avoid duplicates
+    newSlots.forEach((s) => {
+      if (!mentor.availability.includes(s)) {
+        mentor.availability.push(s);
+      }
+    });
+
     await mentor.save();
 
-    res.json({ success: true, availability: mentor.availability });
+    res.status(200).json({ success: true, availability: mentor.availability });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: 'Failed to add slots' });
+    console.error("Error in addAvailability:", err);
+    res.status(500).json({ success: false, message: "Failed to add availability" });
   }
 };
 
-// ✅ Remove availability slot (uses JWT!)
+// ✅ Remove availability slot
 export const removeAvailability = async (req, res) => {
   try {
+    const mentorId = req.user.id;
     const { slot } = req.body;
 
-    const mentor = await User.findById(req.user.id);
-
-    if (!mentor || mentor.role !== 'mentor') {
-      return res.status(404).json({ message: 'Mentor not found' });
+    if (!slot) {
+      return res.status(400).json({ success: false, message: "Slot is required" });
     }
 
-    mentor.availability = mentor.availability.filter(s => s !== slot);
+    const mentor = await User.findById(mentorId);
+    if (!mentor || mentor.role !== "mentor") {
+      return res.status(404).json({ success: false, message: "Mentor not found" });
+    }
+
+    mentor.availability = mentor.availability.filter((s) => s !== slot);
     await mentor.save();
 
-    res.json({ success: true, availability: mentor.availability });
+    res.status(200).json({ success: true, availability: mentor.availability });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: 'Failed to remove slot' });
+    console.error("Error in removeAvailability:", err);
+    res.status(500).json({ success: false, message: "Failed to remove availability" });
+  }
+};
+
+// ✅ Get mentor slots
+export const getMentorSlots = async (req, res) => {
+  try {
+    const mentorId = req.params.id;
+    const mentor = await User.findById(mentorId).select("availability name");
+
+    if (!mentor || mentor.role !== "mentor") {
+      return res.status(404).json({ success: false, message: "Mentor not found" });
+    }
+
+    res.status(200).json({ success: true, slots: mentor.availability });
+  } catch (err) {
+    console.error("Error in getMentorSlots:", err);
+    res.status(500).json({ success: false, message: "Failed to fetch slots" });
   }
 };

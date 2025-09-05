@@ -5,34 +5,45 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { format, isSameDay } from "date-fns";
 import { Calendar as CalendarIcon, Clock, Plus, X } from "lucide-react";
-import API from "../api"; // ✅ Replace with your real API instance
+import API from "../api"; // ✅ Axios instance pointing to http://localhost:5000/api
 
 const AvailabilitySlots = () => {
-  const [slots, setSlots] = useState([]); // store as ISO strings
+  const [slots, setSlots] = useState([]); 
   const [newSlot, setNewSlot] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [userId, setUserId] = useState(null);
 
+  // ✅ Get userId from localStorage
+  useEffect(() => {
+    const userData = localStorage.getItem("user");
+    if (userData) {
+      const parsed = JSON.parse(userData);
+      setUserId(parsed?._id);
+    }
+  }, []);
+
+  // ✅ Fetch my slots from backend
   useEffect(() => {
     const fetchSlots = async () => {
       const token = localStorage.getItem("token");
-      if (!token) return;
+      if (!token || !userId) return;
 
       try {
-        const res = await API.get("/auth/me", {
+        const res = await API.get(`/mentors/${userId}/slots`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
-        if (res.data.user?.role === "mentor") {
-          setSlots(res.data.user.availability || []);
-        }
+        // backend: { success: true, slots: [...] }
+        setSlots(res.data.slots || []);
       } catch (err) {
-        console.log("Silent fail: could not fetch slots.");
+        console.log("Silent fail: could not fetch slots.", err.message);
       }
     };
 
     fetchSlots();
-  }, []);
+  }, [userId]);
 
+  // ✅ Add new slot
   const handleAddSlot = async () => {
     if (!newSlot) {
       alert("Please pick a date & time.");
@@ -41,7 +52,7 @@ const AvailabilitySlots = () => {
 
     const iso = newSlot.toISOString();
 
-    if (slots.includes(iso)) {
+    if (slots.some((s) => new Date(s).toISOString() === iso)) {
       alert("This slot already exists!");
       return;
     }
@@ -49,8 +60,8 @@ const AvailabilitySlots = () => {
     setLoading(true);
     try {
       const res = await API.patch(
-        `/mentors/me/availability`,
-        { slots: [iso] },
+        "/mentors/me/availability",
+        { slots: [iso] }, // ✅ FIXED: backend expects "slots" array
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -59,7 +70,7 @@ const AvailabilitySlots = () => {
         }
       );
 
-      setSlots(res.data.availability || []);
+      setSlots(res.data.availability || []); // backend returns updated availability
       setNewSlot(null);
     } catch (err) {
       console.error(err);
@@ -69,16 +80,16 @@ const AvailabilitySlots = () => {
     }
   };
 
+  // ✅ Remove slot
   const handleRemoveSlot = async (slot) => {
     setLoading(true);
     try {
       const res = await API.patch(
-        `/mentors/me/availability/remove`,
-        { slot },
+        "/mentors/me/availability/remove",
+        { slot }, // ✅ backend expects { slot }
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
-            "Content-Type": "application/json",
           },
         }
       );
@@ -94,9 +105,7 @@ const AvailabilitySlots = () => {
 
   const tileClassName = ({ date, view }) => {
     if (view === "month") {
-      return slots.some((slot) =>
-        isSameDay(new Date(slot), date)
-      )
+      return slots.some((slot) => isSameDay(new Date(slot), date))
         ? "availability-highlight"
         : null;
     }
@@ -104,56 +113,12 @@ const AvailabilitySlots = () => {
 
   return (
     <>
-      <style jsx>{`
+      <style>{`
         .availability-highlight {
           background: #EABFCB !important;
           color: #4E342E !important;
           border-radius: 50% !important;
           font-weight: 600 !important;
-        }
-
-        .custom-calendar {
-          border: none;
-          background: #FCFAF7;
-        }
-
-        .custom-calendar .react-calendar__tile {
-          border-radius: 8px;
-          padding: 12px;
-          color: #4E342E;
-          transition: 0.2s ease;
-        }
-
-        .custom-calendar .react-calendar__tile:hover {
-          background: #F8EDEB;
-        }
-
-        .custom-calendar .react-calendar__tile--active {
-          background: #DE9BAC;
-          color: #FCFAF7;
-        }
-
-        .custom-calendar .react-calendar__navigation button {
-          background: none;
-          border: none;
-          color: #4E342E;
-          font-weight: 600;
-          padding: 8px 12px;
-          border-radius: 8px;
-        }
-
-        .custom-calendar .react-calendar__navigation button:hover {
-          background: #F8EDEB;
-          color: #DE9BAC;
-        }
-
-        .custom-calendar .react-calendar__month-view__weekdays {
-          font-weight: 600;
-          color: #A38D94;
-        }
-
-        .react-datepicker-wrapper {
-          width: 100%;
         }
       `}</style>
 
@@ -202,10 +167,7 @@ const AvailabilitySlots = () => {
                 <CalendarIcon className="w-6 h-6 mr-2" /> Your Calendar
               </h2>
 
-              <Calendar
-                tileClassName={tileClassName}
-                className="custom-calendar"
-              />
+              <Calendar tileClassName={tileClassName} className="custom-calendar" />
 
               <p className="mt-4 text-sm text-mutedmauve flex items-center">
                 <span className="w-4 h-4 bg-peonypink rounded-full mr-2 inline-block"></span>
@@ -224,9 +186,9 @@ const AvailabilitySlots = () => {
               <p className="text-mutedmauve">No slots yet. Add one above!</p>
             ) : (
               <div className="grid gap-4">
-                {slots.map((slot, idx) => (
+                {slots.map((slot, index) => (
                   <div
-                    key={idx}
+                    key={index}
                     className="flex items-center justify-between p-4 bg-blushcream rounded-xl border border-peonypink"
                   >
                     <div>

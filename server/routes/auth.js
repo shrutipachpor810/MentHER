@@ -5,7 +5,7 @@ import User from '../models/User.js';
 
 const router = express.Router();
 
-// ✅ SIGNUP
+// SIGNUP
 router.post('/signup', async (req, res) => {
   const { name, email, password, role, bio, skills, availability } = req.body;
 
@@ -43,7 +43,7 @@ router.post('/signup', async (req, res) => {
         id: newUser._id,
         name: newUser.name,
         role: newUser.role,
-        email: newUser.email,        // ✅ Added
+        email: newUser.email,
       },
     });
   } catch (err) {
@@ -52,12 +52,7 @@ router.post('/signup', async (req, res) => {
   }
 });
 
-<<<<<<< HEAD
-// ✅ LOGIN
-=======
-// Login
-// Login
->>>>>>> 2f4cb43647bf04d6b7578efcf38f35595458946c
+// LOGIN
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
@@ -81,7 +76,7 @@ router.post('/login', async (req, res) => {
         name: user.name,
         role: user.role,
         email: user.email,
-        profilePic: user.profilePic || "", // ✅ Added
+        profilePic: user.profilePic || "",
       },
     });
   } catch (err) {
@@ -90,7 +85,7 @@ router.post('/login', async (req, res) => {
   }
 });
 
-// ✅ ✅ ✅ GET /me (with availability)
+// GET /me (with availability)
 router.get('/me', async (req, res) => {
   const token = req.header('Authorization')?.split(' ')[1];
   if (!token) {
@@ -121,6 +116,5 @@ router.get('/me', async (req, res) => {
     res.status(400).json({ message: 'Invalid token' });
   }
 });
-
 
 export default router;

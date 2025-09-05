@@ -6,9 +6,8 @@ const router = express.Router();
 
 // Submit feedback
 router.post('/:bookingId', auth, submitFeedback);
-router.get('/mentor', auth, getMentorFeedbacks);
 
 // Get feedback for mentor
-router.get('/mentor', auth, getFeedbackForMentor);
+router.get('/mentor', auth, getMentorFeedbacks);
 
 export default router;

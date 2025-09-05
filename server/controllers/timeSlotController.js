@@ -27,7 +27,7 @@ export const addTimeSlot = async (req, res) => {
   }
 };
 
-// ✅ Mentee books a slot with desired time + duration, safe splitting without buffer
+// ✅ Mentee books a slot
 export const bookSlot = async (req, res) => {
   try {
     const { slotId, desiredStartTime, durationMinutes } = req.body;
@@ -38,13 +38,6 @@ export const bookSlot = async (req, res) => {
 
     const desiredStart = new Date(desiredStartTime);
     const desiredEnd = new Date(desiredStart.getTime() + parseInt(durationMinutes) * 60000);
-
-    console.log("Booking request:", {
-      slotStart: slot.startDateTime,
-      slotEnd: slot.endDateTime,
-      desiredStart,
-      desiredEnd,
-    });
 
     if (
       desiredStart.getTime() < slot.startDateTime.getTime() ||
@@ -62,11 +55,12 @@ export const bookSlot = async (req, res) => {
     });
     await newBooking.save();
 
+    // ✅ Split slot if needed
     const splitSlots = [];
     const formatTime = (dateObj) =>
       dateObj.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit", hour12: false });
 
-    // BEFORE SLOT
+    // Before
     if (desiredStart.getTime() > slot.startDateTime.getTime()) {
       const beforeSlot = new TimeSlot({
         mentor: slot.mentor,
@@ -80,7 +74,7 @@ export const bookSlot = async (req, res) => {
       splitSlots.push(beforeSlot);
     }
 
-    // AFTER SLOT
+    // After
     if (desiredEnd.getTime() < slot.endDateTime.getTime()) {
       const afterSlot = new TimeSlot({
         mentor: slot.mentor,
@@ -97,7 +91,7 @@ export const bookSlot = async (req, res) => {
     await slot.deleteOne();
 
     res.json({
-      message: "✅ Slot booked and slots split correctly.",
+      message: "✅ Slot booked and updated.",
       booking: newBooking,
       newSlots: splitSlots,
     });
