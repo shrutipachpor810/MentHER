@@ -44,41 +44,47 @@ const AvailabilitySlots = () => {
   }, [userId]);
 
   // ✅ Add new slot
-  const handleAddSlot = async () => {
-    if (!newSlot) {
-      alert("Please pick a date & time.");
-      return;
-    }
+const handleAddSlot = async () => {
+  // ✅ Validate newSlot
+  if (!newSlot || isNaN(newSlot.getTime())) {
+    alert("Please pick a valid date & time.");
+    return;
+  }
 
-    const iso = newSlot.toISOString();
+  const iso = newSlot.toISOString();
 
-    if (slots.some((s) => new Date(s).toISOString() === iso)) {
-      alert("This slot already exists!");
-      return;
-    }
+  // ✅ Compare with startDateTime of existing slots
+  if (slots.some((s) => {
+    const slotDate = s.startDateTime ? new Date(s.startDateTime) : null;
+    return slotDate && slotDate.toISOString() === iso;
+  })) {
+    alert("This slot already exists!");
+    return;
+  }
 
-    setLoading(true);
-    try {
-      const res = await API.patch(
-        "/mentors/me/availability",
-        { slots: [iso] }, // ✅ FIXED: backend expects "slots" array
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
+  setLoading(true);
+  try {
+    const res = await API.patch(
+      "/mentors/me/availability",
+      { slots: [iso] },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
-      setSlots(res.data.availability || []); // backend returns updated availability
-      setNewSlot(null);
-    } catch (err) {
-      console.error(err);
-      alert(err.response?.data?.message || "Could not add slot");
-    } finally {
-      setLoading(false);
-    }
-  };
+    setSlots(res.data.availability || []);
+    setNewSlot(null);
+  } catch (err) {
+    console.error(err);
+    alert(err.response?.data?.message || "Could not add slot");
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   // ✅ Remove slot
   const handleRemoveSlot = async (slot) => {
@@ -185,31 +191,44 @@ const AvailabilitySlots = () => {
             {slots.length === 0 ? (
               <p className="text-mutedmauve">No slots yet. Add one above!</p>
             ) : (
-              <div className="grid gap-4">
-                {slots.map((slot, index) => (
-                  <div
-                    key={index}
-                    className="flex items-center justify-between p-4 bg-blushcream rounded-xl border border-peonypink"
-                  >
-                    <div>
-                      <p className="font-semibold text-deepcocoa">
-                        {format(new Date(slot), "MMMM d, yyyy")}
-                      </p>
-                      <p className="text-sm text-mutedmauve flex items-center">
-                        <Clock className="w-4 h-4 mr-1" />
-                        {format(new Date(slot), "h:mm aa")}
-                      </p>
-                    </div>
-                    <button
-                      onClick={() => handleRemoveSlot(slot)}
-                      disabled={loading}
-                      className="w-8 h-8 bg-red-100 hover:bg-red-200 text-red-600 rounded-full flex items-center justify-center"
-                    >
-                      <X className="w-4 h-4" />
-                    </button>
-                  </div>
-                ))}
-              </div>
+              
+<div className="grid gap-4">
+  {slots.map((slot) => {
+    const start = slot.startDateTime;
+    const end = slot.endDateTime;
+
+    if (!start || !end) return null; // safety check
+
+    const startDate = new Date(start);
+    const endDate = new Date(end);
+
+    return (
+      <div
+        key={slot._id}
+        className="flex items-center justify-between p-4 bg-blushcream rounded-xl border border-peonypink"
+      >
+        <div>
+          <p className="font-semibold text-deepcocoa">
+            {format(startDate, "MMMM d, yyyy")}
+          </p>
+          <p className="text-sm text-mutedmauve flex items-center">
+            <Clock className="w-4 h-4 mr-1" />
+            {format(startDate, "h:mm aa")} - {format(endDate, "h:mm aa")}
+          </p>
+        </div>
+        <button
+          onClick={() => handleRemoveSlot(slot)}
+          disabled={loading}
+          className="w-8 h-8 bg-red-100 hover:bg-red-200 text-red-600 rounded-full flex items-center justify-center"
+        >
+          <X className="w-4 h-4" />
+        </button>
+      </div>
+    );
+  })}
+</div>
+
+
             )}
           </div>
         </div>
