@@ -2,6 +2,7 @@
 node_modules/
 
 # Env files
+.env
 server/.env
 client/.env
 
