@@ -1,10 +1,13 @@
 🌸 MentHER – Women in Tech Mentorship Platform
+<p align="center"> <b>Connecting women in technology with mentors to grow, learn, and succeed.</b> </p>
 
 MentHER is a web platform designed to connect women in technology with experienced mentors to support career growth, skill development, and meaningful professional connections.
 
-The platform provides a safe and supportive community where women can seek guidance, share experiences, and accelerate their tech careers. 🚀
+The platform provides a safe and supportive community where women can seek guidance, share experiences, and accelerate their tech careers 🚀
 
-👩‍💻 This project was developed collaboratively by:
+👩‍💻 Contributors
+
+This project was developed collaboratively by:
 
 Shruti Pachpor
 
@@ -26,20 +29,20 @@ The platform allows users to:
 
 🤝 Become mentors
 
-🌐 Join a community focused on learning, networking, and career development
+🌐 Join a supportive learning community
 
-The user interface is designed to be minimal, elegant, and empowering, reflecting the theme of women supporting women in technology. 💖
+The user interface is designed to be minimal, elegant, and empowering, reflecting the theme of women supporting women in technology 💖
 
 ✨ Features
-🏠 1. Landing Page
+🏠 Landing Page
 
 The homepage introduces the platform and its mission.
 
-Key highlights:
+Key highlights
 
 🌟 Hero section with “Empowering Women in Tech”
 
-🎯 Call-to-action buttons:
+🎯 Call-to-action buttons
 
 Find a Mentor
 
@@ -47,9 +50,9 @@ Become a Mentor
 
 🎨 Modern UI with visually appealing design
 
-📝 2. User Registration (Sign Up)
+📝 User Registration (Sign Up)
 
-Users can create a new account by providing:
+Users can create an account using:
 
 Full Name
 
@@ -59,25 +62,25 @@ Password
 
 Confirm Password
 
-Role selection (e.g., Find a Mentor)
+Role Selection
 
 Users must also agree to the Terms of Service and Privacy Policy.
 
-🔐 3. User Login
+🔐 User Login
 
-Registered users can log in securely using:
+Registered users can log in using:
 
 Email
 
 Password
 
-Additional options include:
+Additional features include:
 
 ✔ Remember Me functionality
 
 🌐 Social login options (UI supported)
 
-🤝 4. Mentorship Focus
+🤝 Mentorship Focus
 
 The platform focuses on:
 
@@ -90,7 +93,7 @@ The platform focuses on:
 💡 Core Platform Values
 🎯 Personalized Matching
 
-MentHER aims to match mentees with mentors based on:
+MentHER matches mentors and mentees based on:
 
 Skills
 
@@ -100,7 +103,7 @@ Career interests
 
 🛡 Safe & Supportive Community
 
-The platform promotes an inclusive environment where women can openly discuss:
+A platform where women can openly discuss:
 
 Career challenges
 
@@ -110,11 +113,11 @@ Growth opportunities
 
 🚀 Career Growth
 
-MentHER helps users access resources and mentorship that accelerate their tech journey.
+MentHER provides guidance, mentorship, and resources to help women grow in tech.
 
 🎨 UI Design Highlights
 
-The platform features:
+The platform includes:
 
 💗 Soft pink themed interface
 
@@ -129,9 +132,6 @@ The platform features:
 The design reflects empowerment, inclusivity, and professionalism.
 
 🛠 Tech Stack
-
-This project uses modern web development technologies.
-
 💻 Frontend
 
 HTML
@@ -148,34 +148,20 @@ Modern card-based layout
 
 Hero banner sections
 
-
-📸 Screens Included
-
-The platform includes the following pages:
-
-🏠 Landing Page
-
-📝 Sign Up Page
-
+📸 Project Screenshots
+🏠 Home Page
+<p align="center"> <img width="900" src="https://github.com/user-attachments/assets/82c1841c-4fdd-457a-ae95-64d78119dba1"/> </p> <p align="center"><b>HOME PAGE</b></p>
+📖 About Page
+<p align="center"> <img width="900" src="https://github.com/user-attachments/assets/6a000b4f-34a4-4822-a431-fbd15f80853c"/> </p> <p align="center"><b>ABOUT PAGE</b></p>
 🔐 Login Page
-
-📖 About / Features Section
-
+<p align="center"> <img width="900" src="https://github.com/user-attachments/assets/a24309ac-e9a1-4701-92d7-6e391b8546f9"/> </p> <p align="center"><b>LOGIN PAGE</b></p>
+📝 Sign Up Page
+<p align="center"> <img width="900" src="https://github.com/user-attachments/assets/59ea672c-f03a-4128-bc2a-3bd6bba260ab"/> </p> <p align="center"><b>SIGNUP PAGE</b></p>
+👩‍🎓 Mentee Dashboard
+<p align="center"> <img width="900" src="https://github.com/user-attachments/assets/b2249acd-67c2-4661-90f1-05b7cc323021"/> </p> <p align="center"><b>MENTEE DASHBOARD</b></p>
+👩‍🏫 Mentor Dashboard
+<p align="center"> <img width="900" src="https://github.com/user-attachments/assets/a69cb0cc-9bca-489e-9c61-02cb01060128"/> </p> <p align="center"><b>MENTOR DASHBOARD</b></p>
 🔮 Future Improvements
-
-Screenshots of the project:
-<img width="1320" height="612" alt="image" src="https://github.com/user-attachments/assets/82c1841c-4fdd-457a-ae95-64d78119dba1" />
-HOME PAGE
-![WhatsApp Image 2026-03-09 at 14 39 25](https://github.com/user-attachments/assets/6a000b4f-34a4-4822-a431-fbd15f80853c)
-ABOUT PAGE
-![WhatsApp Image 2026-03-09 at 14 39 25 (1)](https://github.com/user-attachments/assets/a24309ac-e9a1-4701-92d7-6e391b8546f9)
-LOGIN PAGE
-![WhatsApp Image 2026-03-09 at 14 39 25 (2)](https://github.com/user-attachments/assets/59ea672c-f03a-4128-bc2a-3bd6bba260ab)
-SIGNUP PAGE
-![WhatsApp Image 2026-03-09 at 14 39 25 (3)](https://github.com/user-attachments/assets/b2249acd-67c2-4661-90f1-05b7cc323021)
-MENTEE DASHBOARD
-![WhatsApp Image 2026-03-09 at 14 39 26](https://github.com/user-attachments/assets/a69cb0cc-9bca-489e-9c61-02cb01060128)
-MENTOR DASHBOARD
 
 Potential future enhancements include:
 
@@ -194,17 +180,17 @@ Potential future enhancements include:
 ⚙ How to Run the Project
 📥 Clone the repository
 git clone https://github.com/your-username/menther.git
-📂 Open the project folder
+
+Open the project folder
 cd menther
 ▶ Run the project
-
 Open index.html in your browser.
 
 🎯 Project Goal
 
-The goal of MentHER is to empower more women to succeed in technology by making mentorship accessible, inclusive, and supportive. 💖
+The goal of MentHER is to empower more women to succeed in technology by making mentorship accessible, inclusive, and supportive 💖
 
-👩‍💻 Contributors
+⭐ Contributors
 
 Shruti Pachpor
 
@@ -212,4 +198,4 @@ Chaitra
 
 Prachi
 
-⭐ Built with the vision of women empowering women in tech.
+<p align="center"> <b>⭐ Built with the vision of women empowering women in tech ⭐</b> </p>
