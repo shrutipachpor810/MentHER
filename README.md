@@ -5,15 +5,6 @@ MentHER is a web platform designed to connect women in technology with experienc
 
 The platform provides a safe and supportive community where women can seek guidance, share experiences, and accelerate their tech careers 🚀
 
-👩‍💻 Contributors
-
-This project was developed collaboratively by:
-
-Shruti Pachpor
-
-Chaitra
-
-Prachi
 
 📌 Project Overview
 
@@ -182,17 +173,25 @@ The Deployment is not yet done, beneath you can find screenshots of the porject 
 
 📸 Project Screenshots
 
-<p align="center"> <img width="900" src="https://github.com/user-attachments/assets/82c1841c-4fdd-457a-ae95-64d78119dba1"/> </p> <p align="center"><b>🏠 HOME PAGE</b></p>
+<p align="center"><b>🏠 HOME PAGE</b></p>
+<p align="center"> <img width="900" src="https://github.com/user-attachments/assets/82c1841c-4fdd-457a-ae95-64d78119dba1"/> </p> 
 
-<p align="center"> <img width="900" src="https://github.com/user-attachments/assets/6a000b4f-34a4-4822-a431-fbd15f80853c"/> </p> <p align="center"><b>📖 ABOUT PAGE</b></p>
+</p> <p align="center"><b>📖 ABOUT PAGE</b></p>
+<p align="center"> <img width="900" src="https://github.com/user-attachments/assets/6a000b4f-34a4-4822-a431-fbd15f80853c"/>
 
-<p align="center"> <img width="900" src="https://github.com/user-attachments/assets/a24309ac-e9a1-4701-92d7-6e391b8546f9"/> </p> <p align="center"><b>🔐 LOGIN PAGE</b></p>
+<p align="center"><b>🔐 LOGIN PAGE</b></p>
+<p align="center"> <img width="900" src="https://github.com/user-attachments/assets/a24309ac-e9a1-4701-92d7-6e391b8546f9"/> </p> 
 
-<p align="center"> <img width="900" src="https://github.com/user-attachments/assets/59ea672c-f03a-4128-bc2a-3bd6bba260ab"/> </p> <p align="center"><b>📝 SIGNUP PAGE</b></p>
+<p align="center"><b>📝 SIGNUP PAGE</b></p>
+<p align="center"> <img width="900" src="https://github.com/user-attachments/assets/59ea672c-f03a-4128-bc2a-3bd6bba260ab"/> </p>
 
-<p align="center"> <img width="900" src="https://github.com/user-attachments/assets/b2249acd-67c2-4661-90f1-05b7cc323021"/> </p> <p align="center"><b>👩‍🎓 MENTEE DASHBOARD</b></p>
+<p align="center"><b>👩‍🎓 MENTEE DASHBOARD</b></p>
+<p align="center"> <img width="900" src="https://github.com/user-attachments/assets/b2249acd-67c2-4661-90f1-05b7cc323021"/> </p> 
 
-<p align="center"> <img width="900" src="https://github.com/user-attachments/assets/a69cb0cc-9bca-489e-9c61-02cb01060128"/> </p> <p align="center"><b>👩‍🏫 MENTOR DASHBOARD</b></p>
+<p align="center"><b>👩‍🏫 MENTOR DASHBOARD</b></p>
+<p align="center"> <img width="900" src="https://github.com/user-attachments/assets/a69cb0cc-9bca-489e-9c61-02cb01060128"/> </p> 
+
+
 🔮 Future Improvements
 
 Potential future enhancements include:
@@ -210,10 +209,16 @@ Potential future enhancements include:
 📊 Advanced dashboards for mentors and mentees
 
 ⚙ How to Run the Project
+
 📥 Clone the repository
+
 git clone https://github.com/your-username/menther.git
+
+
 📂 Open the project folder
+
 cd menther
+
 ▶ Run the project
 
 Open index.html in your browser.
@@ -222,7 +227,9 @@ Open index.html in your browser.
 
 The goal of MentHER is to empower more women to succeed in technology by making mentorship accessible, inclusive, and supportive 💖
 
-⭐ Contributors
+👩‍💻 Contributors
+
+This project was developed collaboratively by:
 
 Shruti Pachpor
 
