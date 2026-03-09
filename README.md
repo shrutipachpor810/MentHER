@@ -165,8 +165,17 @@ The platform includes the following pages:
 
 Screenshots of the project:
 <img width="1320" height="612" alt="image" src="https://github.com/user-attachments/assets/82c1841c-4fdd-457a-ae95-64d78119dba1" />
+HOME PAGE
 ![WhatsApp Image 2026-03-09 at 14 39 25](https://github.com/user-attachments/assets/6a000b4f-34a4-4822-a431-fbd15f80853c)
-
+ABOUT PAGE
+![WhatsApp Image 2026-03-09 at 14 39 25 (1)](https://github.com/user-attachments/assets/a24309ac-e9a1-4701-92d7-6e391b8546f9)
+LOGIN PAGE
+![WhatsApp Image 2026-03-09 at 14 39 25 (2)](https://github.com/user-attachments/assets/59ea672c-f03a-4128-bc2a-3bd6bba260ab)
+SIGNUP PAGE
+![WhatsApp Image 2026-03-09 at 14 39 25 (3)](https://github.com/user-attachments/assets/b2249acd-67c2-4661-90f1-05b7cc323021)
+MENTEE DASHBOARD
+![WhatsApp Image 2026-03-09 at 14 39 26](https://github.com/user-attachments/assets/a69cb0cc-9bca-489e-9c61-02cb01060128)
+MENTOR DASHBOARD
 
 Potential future enhancements include:
 
