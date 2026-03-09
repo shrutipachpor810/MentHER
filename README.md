@@ -148,7 +148,6 @@ Modern card-based layout
 
 Hero banner sections
 
-(This section can be updated depending on the technologies used.)
 
 📸 Screens Included
 
@@ -163,6 +162,11 @@ The platform includes the following pages:
 📖 About / Features Section
 
 🔮 Future Improvements
+
+Screenshots of the project:
+<img width="1320" height="612" alt="image" src="https://github.com/user-attachments/assets/82c1841c-4fdd-457a-ae95-64d78119dba1" />
+![WhatsApp Image 2026-03-09 at 14 39 25](https://github.com/user-attachments/assets/6a000b4f-34a4-4822-a431-fbd15f80853c)
+
 
 Potential future enhancements include:
 
