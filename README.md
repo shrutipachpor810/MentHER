@@ -1,240 +1,287 @@
-🌸 <b>MentHER – Women in Tech Mentorship Platform</b>
-<b>Connecting women in technology with mentors to grow, learn, and succeed.</b> 
+# 🌸 MentHER – Women in Tech Mentorship Platform
 
-MentHER is a web platform designed to connect women in technology with experienced mentors to support career growth, skill development, and meaningful professional connections.
+**Connecting women in technology with mentors to grow, learn, and succeed.**
 
-The platform provides a safe and supportive community where women can seek guidance, share experiences, and accelerate their tech careers 🚀
+MentHER is a web platform designed to connect women in technology with experienced mentors to support **career growth, skill development, and meaningful professional connections**.
 
+The platform provides a **safe and supportive community** where women can seek guidance, share experiences, and accelerate their tech careers 🚀
 
-📌 Project Overview
+---
 
-MentHER aims to bridge the gap between aspiring women in tech and experienced industry mentors.
+# 📌 Project Overview
+
+MentHER aims to **bridge the gap between aspiring women in tech and experienced industry mentors.**
 
 The platform allows users to:
 
-📝 Create an account
+* 📝 Create an account
+* 🔐 Log in securely
+* 👩‍🏫 Find mentors
+* 🤝 Become mentors
+* 🌐 Join a supportive learning community
 
-🔐 Log in securely
+The user interface is designed to be **minimal, elegant, and empowering**, reflecting the theme of **women supporting women in technology 💖**
 
-👩‍🏫 Find mentors
+---
 
-🤝 Become mentors
+# ✨ Features
 
-🌐 Join a supportive learning community
-
-The user interface is designed to be minimal, elegant, and empowering, reflecting the theme of women supporting women in technology 💖
-
-✨ Features
-🏠 Landing Page
+## 🏠 Landing Page
 
 The homepage introduces the platform and its mission.
 
-Key highlights
+**Key Highlights:**
 
-🌟 Hero section with “Empowering Women in Tech”
+* 🌟 Hero section with *“Empowering Women in Tech”*
+* 🎯 Call-to-action buttons
 
-🎯 Call-to-action buttons
+  * Find a Mentor
+  * Become a Mentor
+* 🎨 Modern UI with visually appealing design
 
-Find a Mentor
+---
 
-Become a Mentor
-
-🎨 Modern UI with visually appealing design
-
-📝 User Registration (Sign Up)
+## 📝 User Registration (Sign Up)
 
 Users can create an account using:
 
-Full Name
+* Full Name
+* Email Address
+* Password
+* Confirm Password
+* Role Selection
 
-Email Address
+Users must also agree to:
 
-Password
+* Terms of Service
+* Privacy Policy
 
-Confirm Password
+---
 
-Role Selection
-
-Users must also agree to the Terms of Service and Privacy Policy.
-
-🔐 User Login
+## 🔐 User Login
 
 Registered users can log in using:
 
-Email
+* Email
+* Password
 
-Password
+**Additional Features:**
 
-Additional features include:
+* ✔ Remember Me functionality
+* 🌐 Social login options *(UI supported)*
 
-✔ Remember Me functionality
+---
 
-🌐 Social login options (UI supported)
-
-🤝 Mentorship Focus
+## 🤝 Mentorship Focus
 
 The platform focuses on:
 
-🎯 Personalized mentor matching
+* 🎯 Personalized mentor matching
+* 🛡 Safe and supportive environment
+* 🚀 Career acceleration opportunities
 
-🛡 Safe and supportive environment
+---
 
-🚀 Career acceleration opportunities
+# 💡 Core Platform Values
 
-💡 Core Platform Values
-🎯 Personalized Matching
+## 🎯 Personalized Matching
 
 MentHER matches mentors and mentees based on:
 
-Skills
+* Skills
+* Goals
+* Career interests
 
-Goals
+---
 
-Career interests
-
-🛡 Safe & Supportive Community
+## 🛡 Safe & Supportive Community
 
 A platform where women can openly discuss:
 
-Career challenges
+* Career challenges
+* Technical learning
+* Growth opportunities
 
-Technical learning
+---
 
-Growth opportunities
+## 🚀 Career Growth
 
-🚀 Career Growth
+MentHER provides:
 
-MentHER provides guidance, mentorship, and resources to help women grow in tech.
+* Guidance
+* Mentorship
+* Resources
 
-🎨 UI Design Highlights
+to help women **grow and succeed in tech**.
+
+---
+
+# 🎨 UI Design Highlights
 
 The platform includes:
 
-💗 Soft pink themed interface
+* 💗 Soft pink themed interface
+* 🧩 Modern card layouts
+* 🖼 Image-driven hero sections
+* 🔐 Clean authentication pages
+* 📱 Responsive layout
 
-🧩 Modern card layouts
+The design reflects **empowerment, inclusivity, and professionalism**.
 
-🖼 Image-driven hero sections
+---
 
-🔐 Clean authentication pages
+# 🛠 Tech Stack
 
-📱 Responsive layout
+## 💻 Frontend
 
-The design reflects empowerment, inclusivity, and professionalism.
+* React.js
+* Tailwind CSS
 
-🛠 Tech Stack
-💻 Frontend
+## ⚙ Backend
 
-React.js
+* Node.js
+* Express.js
 
-Tailwind CSS
+## 🗄 Database
 
-⚙ Backend
+* MongoDB
 
-Node.js
+## 🔐 Authentication
 
-Express.js
+* JWT (JSON Web Tokens)
 
-🗄 Database
+## 📁 File Uploads
 
-MongoDB
+* Multer
 
-🔐 Authentication
+## ⚡ Real-time Communication
 
-JWT (JSON Web Tokens)
+* Socket.io *(for chat & video signaling)*
 
-📁 File Uploads
+## 🧠 AI Integration
 
-Multer
+* Google Generative AI *(for mentorship suggestions)*
 
-⚡ Real-time Communication
+## 🔄 State Management
 
-Socket.io (for chat & video signaling)
+* React Hooks
+* Context API
 
-🧠 AI Integration
+## 🌐 API Architecture
 
-Google Generative AI for mentorship suggestions
+* RESTful APIs
+* Secure Routing
 
-🔄 State Management
+---
 
-React Hooks
+# 🚀 Deployment
 
-Context API
+Deployment is **not yet completed**.
 
-🌐 API Architecture
+Below are screenshots of the project until deployment is finished.
 
-RESTful APIs
+---
 
-Secure Routing
+# 📸 Project Screenshots
 
-🚀 Deployment 
+## 🏠 Home Page
 
-The Deployment is not yet done, beneath you can find screenshots of the porject till then.
+<p align="center">
+<img width="900" src="https://github.com/user-attachments/assets/82c1841c-4fdd-457a-ae95-64d78119dba1"/>
+</p>
 
-📸 Project Screenshots
+---
 
-<p align="center"><b>🏠 HOME PAGE</b></p>
-<p align="center"> <img width="900" src="https://github.com/user-attachments/assets/82c1841c-4fdd-457a-ae95-64d78119dba1"/> </p> 
+## 📖 About Page
 
-</p> <p align="center"><b>📖 ABOUT PAGE</b></p>
-<p align="center"> <img width="900" src="https://github.com/user-attachments/assets/6a000b4f-34a4-4822-a431-fbd15f80853c"/>
+<p align="center">
+<img width="900" src="https://github.com/user-attachments/assets/6a000b4f-34a4-4822-a431-fbd15f80853c"/>
+</p>
 
-<p align="center"><b>🔐 LOGIN PAGE</b></p>
-<p align="center"> <img width="900" src="https://github.com/user-attachments/assets/a24309ac-e9a1-4701-92d7-6e391b8546f9"/> </p> 
+---
 
-<p align="center"><b>📝 SIGNUP PAGE</b></p>
-<p align="center"> <img width="900" src="https://github.com/user-attachments/assets/59ea672c-f03a-4128-bc2a-3bd6bba260ab"/> </p>
+## 🔐 Login Page
 
-<p align="center"><b>👩‍🎓 MENTEE DASHBOARD</b></p>
-<p align="center"> <img width="900" src="https://github.com/user-attachments/assets/b2249acd-67c2-4661-90f1-05b7cc323021"/> </p> 
+<p align="center">
+<img width="900" src="https://github.com/user-attachments/assets/a24309ac-e9a1-4701-92d7-6e391b8546f9"/>
+</p>
 
-<p align="center"><b>👩‍🏫 MENTOR DASHBOARD</b></p>
-<p align="center"> <img width="900" src="https://github.com/user-attachments/assets/a69cb0cc-9bca-489e-9c61-02cb01060128"/> </p> 
+---
 
+## 📝 Signup Page
 
-🔮 Future Improvements
+<p align="center">
+<img width="900" src="https://github.com/user-attachments/assets/59ea672c-f03a-4128-bc2a-3bd6bba260ab"/>
+</p>
+
+---
+
+## 👩‍🎓 Mentee Dashboard
+
+<p align="center">
+<img width="900" src="https://github.com/user-attachments/assets/b2249acd-67c2-4661-90f1-05b7cc323021"/>
+</p>
+
+---
+
+## 👩‍🏫 Mentor Dashboard
+
+<p align="center">
+<img width="900" src="https://github.com/user-attachments/assets/a69cb0cc-9bca-489e-9c61-02cb01060128"/>
+</p>
+
+---
+
+# 🔮 Future Improvements
 
 Potential future enhancements include:
 
-👩‍🏫 Mentor profile pages
+* 👩‍🏫 Mentor profile pages
+* 💬 Chat between mentors and mentees
+* 🤖 AI-based mentor matching
+* 📅 Event and workshop listings
+* 🔎 Skill-based mentor filtering
+* 📊 Advanced dashboards for mentors and mentees
 
-💬 Chat between mentors and mentees
+---
 
-🤖 AI-based mentor matching
+# ⚙ How to Run the Project
 
-📅 Event and workshop listings
+### 1️⃣ Clone the Repository
 
-🔎 Skill-based mentor filtering
-
-📊 Advanced dashboards for mentors and mentees
-
-⚙ How to Run the Project
-
-📥 Clone the repository
-
+```bash
 git clone https://github.com/your-username/menther.git
+```
 
+### 2️⃣ Open the Project Folder
 
-📂 Open the project folder
-
+```bash
 cd menther
+```
 
-▶ Run the project
+### 3️⃣ Run the Project
 
-Open index.html in your browser.
+Open **index.html** in your browser.
 
-🎯 Project Goal
+---
 
-The goal of MentHER is to empower more women to succeed in technology by making mentorship accessible, inclusive, and supportive 💖
+# 🎯 Project Goal
 
-👩‍💻 Contributors
+The goal of **MentHER** is to empower more women to succeed in technology by making mentorship **accessible, inclusive, and supportive 💖**
+
+---
+
+# 👩‍💻 Contributors
 
 This project was developed collaboratively by:
 
-Shruti Pachpor
+* @shrutipachpor810
+* **Chaitra**
+* @prachi-madane14
 
-Chaitra
+---
 
-Prachi
+<p align="center">
+<b>⭐ Built with the vision of women empowering women in tech ⭐</b>
+</p>
 
-<p align="center"> <b>⭐ Built with the vision of women empowering women in tech ⭐</b> </p>
