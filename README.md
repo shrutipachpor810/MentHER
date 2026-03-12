@@ -276,7 +276,7 @@ The goal of **MentHER** is to empower more women to succeed in technology by mak
 This project was developed collaboratively by:
 
 * @shrutipachpor810
-* **Chaitra**
+* @Mystica2004 (Chaitra)
 * @prachi-madane14
 
 ---
